@@ -33,19 +33,24 @@ export class ProposalsService {
     }
   }
 
-  findOne(id: number) {
+  findOne(id: number, userId: number) {
     try {
-      return this.proposalRepository.findOne({ where: { id } });
+      return this.proposalRepository.findOne({
+        where: { id, createdBy: { id: userId } },
+      });
     } catch (err) {
       throw err;
     }
   }
 
-  async approveProposal(proposalId: number) {
+  async approveProposal(proposalId: number, userId: number) {
     try {
-      const proposal = await this.findOne(proposalId);
+      const proposal = await this.proposalRepository.findOne({
+        where: { id: proposalId, createdBy: { id: userId } },
+      });
+
       if (!proposal) {
-        throw new Error('Proposta não encontrada.');
+        throw new Error('Proposta não encontrada ou não pertence ao usuário.');
       }
 
       if (proposal.status === ProposalStatus.PENDING) {
@@ -60,9 +65,11 @@ export class ProposalsService {
     }
   }
 
-  async refusedProposal(proposalId: number) {
+  async refusedProposal(proposalId: number, userId: number) {
     try {
-      const proposal = await this.findOne(proposalId);
+      const proposal = await this.proposalRepository.findOne({
+        where: { id: proposalId, createdBy: { id: userId } },
+      });
       if (!proposal) {
         throw new Error('Proposta não encontrada.');
       }

@@ -15,7 +15,6 @@ export class UsersController {
   create(
     @Body() createUserDto: { name: string; email: string },
   ): Promise<User> {
-    console.log(`entoru aqui!`);
     return this.usersService.create(createUserDto);
   }
 }

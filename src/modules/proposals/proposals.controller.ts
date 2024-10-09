@@ -37,8 +37,6 @@ export class ProposalsController {
   @Get(':id')
   findOne(@Param('id') id: string, @Req() req: Request) {
     const userId = req.user.id;
-    //@ts-ignore
-
     return this.proposalsService.findOne(+id, userId);
   }
 
@@ -55,16 +53,12 @@ export class ProposalsController {
   @Post(':proposal_id/approve')
   approve(@Param('proposal_id') proposalId: string, @Req() req: Request) {
     const userId = req.user.id;
-    //@ts-ignore
-
     return this.proposalsService.approveProposal(+proposalId, userId);
   }
 
   @Post(':proposal_id/refused')
   refused(@Param('proposal_id') proposalId: string, @Req() req: Request) {
     const userId = req.user.id;
-    //@ts-ignore
-
     return this.proposalsService.refusedProposal(+proposalId, userId);
   }
 }
