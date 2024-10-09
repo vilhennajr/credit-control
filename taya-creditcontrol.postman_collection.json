@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "fa797340-ebe6-481b-8bf3-f187cb822417",
+		"name": "Credit Control",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34965783",
+		"_collection_link": "https://red-spaceship-706292.postman.co/workspace/My-Workspace~db5105c0-a1dd-41d4-83bf-414cc9fe386a/collection/34965783-fa797340-ebe6-481b-8bf3-f187cb822417?action=share&source=collection_link&creator=34965783"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Flaviano Vilhena\",\n  \"email\": \"jane.doe@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrlCreditControl}}/users"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseUrlCreditControl}}/users/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Proposals",
+			"item": [
+				{
+					"name": "Create proposals",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerId\": 1,  // ID do cliente\n  \"createdById\": 2, // ID do usuário que cria a proposta\n  \"amount\": 2000.00,\n  \"profit\": 400.00,\n  \"approvedById\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrlCreditControl}}/proposals"
+					},
+					"response": []
+				},
+				{
+					"name": "Aprove Proposals",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{BaseUrlCreditControl}}/proposals/17/approve"
+					},
+					"response": []
+				},
+				{
+					"name": "Refused Proposals",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrlCreditControl}}/proposals/23/refused"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Proposals",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrlCreditControl}}/proposals"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Proposals By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrlCreditControl}}/proposals/24"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Proposals Refused",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrlCreditControl}}/proposals/refused"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Create Customers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Acme Corp\",\n  \"balance\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseUrlCreditControl}}/customers"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get Status Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": "{{BaseUrlCreditControl}}/admin/profit-by-status"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Best Users by Date",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseUrlCreditControl}}/admin/best-users?start=2024-10-01&end=2024-10-11",
+							"host": [
+								"{{BaseUrlCreditControl}}"
+							],
+							"path": [
+								"admin",
+								"best-users"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2024-10-01"
+								},
+								{
+									"key": "end",
+									"value": "2024-10-11"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
