@@ -25,7 +25,7 @@
 ## Description
 
 ```bash
-TAYA - PROJECT CREDIT CONTROL
+TAYA - PROJECT CREDIT CONTROL (Nest JS, TypeORM and SQLite)
 ```
 
 ## Installation
@@ -40,7 +40,7 @@ $ npm install
 $ npm run start
 ```
 
-## Colletions - POSTMAN
+## Collections - POSTMAN
 
 ```bash
 ./taya-creditcontrol.postman_collection.json
